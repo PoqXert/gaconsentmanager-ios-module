@@ -1,0 +1,15 @@
+
+Import('env')
+Import('env_modules')
+
+sources = [
+           'register_types.cpp',
+           'ios/src/ConsentManager.mm',
+           'ios/src/helper.mm',
+           ]
+
+ga_env = env_modules.Clone()
+
+if (env["platform"] == "iphone"):
+    ga_env.Append(CCFLAGS=["-fmodules", "-fcxx-modules"])
+    ga_env.add_source_files(env.modules_sources, sources)
